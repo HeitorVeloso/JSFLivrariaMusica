@@ -1,0 +1,44 @@
+.ui-widget {
+    font-size: 18px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;
+    ;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+.col{
+    display: inline-block;
+    
+}
+.box{
+    display: inline-block;
+    
+}
+.depoisMenu{
+    margin-left: 280px;
+}
+.left{
+    position:fixed;
+    left: 4px;
+    top: 1em;    
+    width: 275px;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    padding-left: 1.5em;
+}
+.cantoDireito{
+    position:fixed;
+    right: 10px;
+    top: 0.4em;    
+}

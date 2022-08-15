@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <title>Streaming Musica</title>
+            <link rel="stylesheet" type="text/css" href="/ProjetoFinalJSFBibliotecaMusicas/faces/jsfcrud.css" />
+            <h:outputStylesheet name="css/jsfcrud.css"/>
+        </ui:define>
+        <ui:define name="body">
+            <font size="2" face="Verdana">
+                <br/> <br/>  
+                
+                <!--<h:link outcome="/university/Listar" value="Acesse aqui o Cadastro de Universidades"/> -->
+
+                
+
+                <h:form>  
+                    <div class="depoisMenu">
+                        <ui:repeat value="#{imagemMusicaController.items}" var="image">      
+                            <div class="col">
+                                <div class="box">
+                                    <h5>#{image.nomeMusica}</h5>
+                                    <p:graphicImage value="#{image.caminhoImagem}" height="200" width="300" />            
+                                    <p:audio value="#{image.caminhoMusica}"
+                                             controls="true" >
+                                        Your browser does not support the audio element.
+                                        See: <h:outputLink value="https://www.w3schools.com/html/html5_audio.asp">HTML5 Audio</h:outputLink>
+                                    </p:audio>
+                                </div>                    
+                            </div>    
+                        </ui:repeat>
+                    </div>
+                </h:form>            
+            </font>
+                
+        </ui:define>
+    </ui:composition>
+
+</html>
+

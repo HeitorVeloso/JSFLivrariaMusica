@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+        
+    <ui:define name="titulo">
+        Login
+    </ui:define>    
+    <ui:composition>  
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/fontAwesome.css"/>
+        <p:dialog visible="true" width="400" height="500" header="Acessar o Sistema" showHeader="false" modal="true" resizable="false" appendTo="@(body)">            
+            <h:panelGrid style="margin: 0 auto;">
+                <h:outputText styleClass="fa fa-lock fa-5x"/>
+            </h:panelGrid>
+               
+            <h:form id="loginForm">
+                <h:panelGrid columns="1" rendered="#{loginController.selected != null}">
+                    Digite seu usuário e senha para ter acesso ao sistema:                    
+                    <p:messages id="messagesLogin"/>                    
+                    <p:inputText placeholder="Usuário" value="#{loginController.selected.login}" size="40" required="true" requiredMessage="Campo Login é obrigatório"/>                    
+                    <p:password placeholder="Senha" value="#{loginController.selected.senha}" size="40" required="true" requiredMessage="Campo Senha é obrigatório"/>
+                    <p:commandButton value="Log In" action="#{loginController.logIn()}" update="messagesLogin"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <h:outputStylesheet name="css/layoult.css"/>
+        <ui:define name="body">
+        <h:form id="PlaylistForm">
+                    <div class="depoisMenu">
+                        <p:panel header="Lista de Playlists">
+                            <p:dataTable id="datalist" value="#{playlistController.items}" var="item"
+                                         selectionMode="single" selection="#{playlistController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton editButton deleteButton"/>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Código"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nome}"/>
+                                </p:column>                        
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Incluir" actionListener="#{playlistController.prepareCreate()}" update=":PlaylistCreateForm" oncomplete="PF('PlaylistCreateDialog').show()"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Alterar" actionListener="#{playlistController.update()}" update=":PlaylistEditForm" oncomplete="PF('PlaylistEditDialog').show()" />                            
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Excluir" actionListener="#{playlistController.destroy()}" update="growl,datalist" />
+                                    <p:commandButton id="visualizarPlaylistButton" icon="ui-icon-plus"  value="VisulizarPlaylist" actionListener="#{playlistController.update()}"  action="/conteudoPlaylist/ListarImagemMusica?faces-redirect=true"/>
+                                    <p:commandButton id="visualizarPlaylistButton2" icon="ui-icon-plus"  value="VisulizarPlaylist2" actionListener="#{playlistController.update()}"  action="/conteudoPlaylist2/ListarImagemMusica2?faces-redirect=true"/>
+                                </f:facet>
+                            </p:dataTable>
+                            <p:contextMenu for="datalist">
+                                <p:menuitem value="Alterar" update=":PlaylistEditForm" icon="ui-icon-pencil"
+                                            actionListener="#{playlistController.update()}" oncomplete="PF('PlaylistEditDialog').show()"/>
+                                <p:menuitem value="Delete" update="growl,datalist" icon="ui-icon-trash"
+                                            actionListener="#{playlistController.destroy()}"/>
+                            </p:contextMenu>
+                        </p:panel>
+                    </div>
+                </h:form>
+                <ui:include src="Incluir.xhtml"/>
+                <ui:include src="Editar.xhtml"/>        
+            
+
+            <h:form>
+                <h:commandLink action="#{playlist.listSetup}" value="Show All Playlist Items"/>
+            </h:form>
+            </ui:define>
+    </ui:composition>
+</html>
